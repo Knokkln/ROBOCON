@@ -43,18 +43,14 @@ void main_task(intptr_t exinf){
 		th = (int)(20/wr/pi*360);
 		stop = (int)(10/wr/pi*360);
 		while(1){
+			dist = ev3_ultrasonic_sensor_get_distance(ultrasonic_sensor);
 			ev3_motor_set_power(motorLeft,speed);
 			ev3_motor_set_power(motorRight,speed);
 
 			degreeLeft=0;
 			while(30<dist){
 				dist = ev3_ultrasonic_sensor_get_distance(ultrasonic_sensor);
-				tslp_tsk(100);
-			}
-			while(dist!=255){
-				dist = ev3_ultrasonic_sensor_get_distance(ultrasonic_sensor);
-				tslp_tsk(120);
-
+				tslp_tsk(50);
 			}
 			
 			ev3_motor_stop(motorLeft,false);
@@ -95,35 +91,6 @@ void main_task(intptr_t exinf){
 	//	tslp_tsk(wait);
 		dispLcd();
 		tslp_tsk(100);
-		ev3_motor_set_power(motorLeft,-5);
-		ev3_motor_set_power(motorRight,-5);
-		if(degreeLeft>degreeLeft-th){
-			degreeLeft=ev3_motor_get_counts(motorLeft);
-			ev3_lcd_draw_string("degreeLeft=",1*CSIZE,5*RSIZE);
-			tslp_tsk(10);
-			ws=((float)((float)(highpace-slowpace)*(cum-degreeLeft)/th)+slowpace);
-			speed=((int)(ws+0.5)*-1);
-			ev3_motor_set_power(motorLeft,speed);
-			ev3_motor_set_power(motorRight,speed);
-		}
-		else if(degreeLeft>th){
-			degreeLeft=ev3_motor_get_counts(motorLeft);
-			ev3_lcd_draw_string("degreeLeft=",1*CSIZE,5*RSIZE);
-			tslp_tsk(10);
-		}
-		else if(degreeLeft>0){
-			degreeLeft=ev3_motor_get_counts(motorLeft);
-			ev3_lcd_draw_string("degreeLeft=",1*CSIZE,5*RSIZE);
-			tslp_tsk(10);
-			ws=((float)((float)(highpace-slowpace)*degreeLeft/th)+slowpace);
-			speed=((int)(ws+0.5)*-1);
-			ev3_motor_set_power(motorLeft,speed);
-			ev3_motor_set_power(motorRight,speed);
-		}
-		else{
-			ev3_motor_stop(motorLeft,true);
-			ev3_motor_stop(motorRight,true);
-			}
 	dispLcd();
 
 }
