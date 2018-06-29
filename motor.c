@@ -7,7 +7,7 @@ void main_task(intptr_t exinf){
 	int battery;
 	ulong_t time;
 	//speed25%_2s and100%_2s
-	int speed=40,wait=2000;
+	int speed=15,wait=2000;
 	//param
 	float wr=5.6;
 	float pi =3.14159;
@@ -65,7 +65,7 @@ void main_task(intptr_t exinf){
 			ev3_motor_reset_counts(motorRight);
 			ev3_motor_set_power(motorLeft,-speed);
 			ev3_motor_set_power(motorRight,-speed);
-			cum=(-40/(wr*pi))*360;
+			cum=(-15/(wr*pi))*360;
 
 			while(cum<degreeLeft){
 				degreeLeft=ev3_motor_get_counts(motorLeft);
