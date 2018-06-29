@@ -7,7 +7,7 @@ void main_task(intptr_t exinf){
 	int battery;
 	ulong_t time;
 	//speed25%_2s and100%_2s
-	int speed=15,wait=2000;
+	int speed=40,wait=2000;
 	//param
 	float wr=5.6;
 	float pi =3.14159;
@@ -58,8 +58,7 @@ void main_task(intptr_t exinf){
 			}
 			
 			ev3_motor_stop(motorLeft,false);
-			ev3_motor_stop(motorRight,false);
-			tslp_tsk(1000);				
+			ev3_motor_stop(motorRight,false);				
 			ev3_motor_reset_counts(motorCenter);
 			ev3_motor_reset_counts(motorLeft);
 			ev3_motor_reset_counts(motorRight);
